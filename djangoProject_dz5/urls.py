@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from djangoProject_dz5.views import homepage_views, homepage
+from djangoProject_dz5.views import homepage_views, homepage, product_category
 
 
 urlpatterns = [
@@ -23,5 +23,6 @@ urlpatterns = [
     path('', homepage, name='homepage'),
     path('homepage/<str:username>/', homepage_views, name='homepage_view'),
     path('', include('user_profile.urls')),
-    path('', include('product_page.urls'))
+    path('', include('product_page.urls')),
+    path('ap-<slug:str>', product_category, name = 'product-category')
 ]

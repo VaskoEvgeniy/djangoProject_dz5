@@ -10,8 +10,8 @@ class TenantModelAdmin(admin.ModelAdmin):
     list_filter = 'is_active', 'last_name'
 
 class ProductModelAdmin(admin.ModelAdmin):
-    list_display = 'product_name', 'product_cost', 'availability', 'product_slug'
-    list_editable = 'product_cost', 'availability', 'product_slug'
+    list_display = 'product_name', 'product_cost', 'availability', 'product_slug', 'product_category'
+    list_editable = 'product_cost', 'availability', 'product_slug', 'product_category'
     list_filter = 'product_cost', 'availability'
     prepopulated_fields = {
         'product_slug': ['product_name']
