@@ -5,7 +5,7 @@
 <div>
     <ul>
         {% for category in category_list %}
-            <li><a href="{% url 'product-category' str=category.slug%}">{{ category.category_name }}</a> </li>
+            <li><a href="{% url 'product-category' category_name=category.category_slug%}">Категория товара {{ category.category_name }}</a> </li>
         {% endfor %}
 
     </ul>

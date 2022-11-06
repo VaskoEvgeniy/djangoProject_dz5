@@ -2,7 +2,9 @@
 {% block container %}
 <div>
     <ul>
-
+         {% for product in product_list %}
+            <li><a href="{% url 'product' category_name=product.product_category product_name=product.product_slug%}">Товар {{ product.product_slug }}</a> </li>
+        {% endfor %}
 
     </ul>
 </div>

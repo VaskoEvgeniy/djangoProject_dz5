@@ -3,5 +3,5 @@ from product_page.views import product_view
 
 
 urlpatterns = [
-    path('<str:product_name>/', product_view, name='product')
+    path('ap-<slug:category_name>/ap-<str:product_name>', product_view, name='product')
 ]

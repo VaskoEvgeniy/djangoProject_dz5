@@ -1,4 +1,4 @@
-from django.http import HttpRequest, HttpResponse
+from django.http import HttpRequest, HttpResponse, Http404
 from django.shortcuts import render
 from djangoProject_dz5.models import Category
 from product_page.models import Product
@@ -24,8 +24,11 @@ def homepage_views(request: HttpRequest, username: str) -> HttpResponse:
     }
     return render(request, 'Home_page.html', custom_ctx_obj)
 
-def product_category(request: HttpRequest)-> HttpResponse:
-    context = {
-
-    }
-    return render(request, 'Product_category.html', context)
+def product_category(request: HttpRequest, category_name: str) -> HttpResponse:
+    try:
+        ctx = {
+            "product_list": Product.objects.filter(product_category__category_name=category_name)
+        }
+        return render(request, "Product_category.html", ctx)
+    except :
+        raise Http404('Not found')

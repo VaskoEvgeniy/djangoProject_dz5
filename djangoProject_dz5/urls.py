@@ -24,5 +24,5 @@ urlpatterns = [
     path('homepage/<str:username>/', homepage_views, name='homepage_view'),
     path('', include('user_profile.urls')),
     path('', include('product_page.urls')),
-    path('ap-<slug:str>', product_category, name = 'product-category')
+    path('ap-<slug:category_name>/', product_category, name = 'product-category')
 ]
