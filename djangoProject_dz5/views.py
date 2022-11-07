@@ -1,5 +1,7 @@
-from django.http import HttpRequest, HttpResponse
+from django.http import HttpRequest, HttpResponse, Http404
 from django.shortcuts import render
+from djangoProject_dz5.models import Category
+from product_page.models import Product
 import random
 
 def random_cost():
@@ -7,21 +9,26 @@ def random_cost():
     return cost
 
 def homepage(request: HttpRequest)-> HttpResponse:
-    home_page = {
-        'username': 'anonim_user',
-        'cost_item': random_cost,
-        'item_name': ['Rozenta', 'Roznica', 'Comfy'],
-    }
-    return render(request,'Home_page.html', home_page)
-
-def homepage_views(request: HttpRequest, username: str) -> HttpResponse:
-
 
     custom_ctx_obj = {
-        'username': username,
-
-        'cost_item': random_cost,
-        'item_name': ['Rozenta', 'Roznica', 'Comfy'],
+        'category_list': Category.objects.all()
 
     }
     return render(request, 'Home_page.html', custom_ctx_obj)
+
+def homepage_views(request: HttpRequest, username: str) -> HttpResponse:
+
+    custom_ctx_obj = {
+        'category_list': Category.objects.all()
+
+    }
+    return render(request, 'Home_page.html', custom_ctx_obj)
+
+def product_category(request: HttpRequest, category_name: str) -> HttpResponse:
+    try:
+        ctx = {
+            "product_list": Product.objects.filter(product_category__category_name=category_name)
+        }
+        return render(request, "Product_category.html", ctx)
+    except :
+        raise Http404('Not found')
